@@ -5,7 +5,7 @@ API project for Coding Challenge.
 ## Getting Started
 
 ### Installation
-You need node.js (8.11.* or later), npm, and MongoDB installed. Clone the repository, install node packages and start the sever with seed data.
+You need node.js (8.11.* or later), npm, and MongoDB installed. Clone the repository, install node packages, and start the server with seed data.
 ```
 git clone https://github.com/khay/movielist
 cd movielist
