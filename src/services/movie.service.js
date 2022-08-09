@@ -7,17 +7,23 @@ import MOVIE from "../models/movie.model";
 async function getMovileListService(reqInfo) {
   // destructure page and limit and set default values
   const { page = 1, limit = 5, keyword = "", genre = "", year = "" } = reqInfo;
-  try {    
+  let sortByObj = {};
+  if (reqInfo.sortBy) {
+    let sortByKey = reqInfo.sortBy.split(",").join(" ");
+    sortByObj[sortByKey] = 1;
+  }
+  try {
     let query = {
       $and: [
         { title: { $regex: keyword, $options: "i" } },
         { genre: { $regex: genre, $options: "i" } },
         { productionYear: { $regex: year, $options: "i" } },
       ],
-    };    
+    };
     let movies = await MOVIE.find(query)
       .limit(limit * 1)
       .skip((page - 1) * limit)
+      .sort(sortByObj)
       .exec();
     const count = await MOVIE.countDocuments(query);
     return {
