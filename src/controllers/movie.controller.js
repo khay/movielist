@@ -3,8 +3,24 @@ import {
   getMovileDetailService,
 } from "../services/movie.service";
 
-async function getMovileList(req, res, next) {}
+// Get all movie list with pagination
+async function getMovileList(req, res, next) {
+  try {
+    let movies = await getMovileListService(req.query);
+    return res.status(200).send(movies);
+  } catch (err) {
+    next(err);
+  }
+}
 
-async function getMovileDetail(req, res, next) {}
+// Get a movile detail of the provided id
+async function getMovileDetail(req, res, next) {
+  try {
+    let movie = await getMovileDetailService(req.params);
+    return res.status(200).send(movie);
+  } catch (err) {
+    next(err);
+  }
+}
 
-export { getMovileList, getMovileDetail };
+export default { getMovileList, getMovileDetail };
