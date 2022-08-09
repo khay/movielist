@@ -1,10 +1,30 @@
 "use strict";
 import MOVIE from "../models/movie.model";
 
+// Return list of movies
+// page and limit for pagination
+// keyword to search the movie
 async function getMovileListService(reqInfo) {
-  try {
-    let movies = await MOVIE.find();
-    return movies;
+  // destructure page and limit and set default values
+  const { page = 1, limit = 5, keyword = "", genre = "", year = "" } = reqInfo;
+  try {    
+    let query = {
+      $and: [
+        { title: { $regex: keyword, $options: "i" } },
+        { genre: { $regex: genre, $options: "i" } },
+        { productionYear: { $regex: year, $options: "i" } },
+      ],
+    };    
+    let movies = await MOVIE.find(query)
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec();
+    const count = await MOVIE.countDocuments(query);
+    return {
+      movies,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page,
+    };
   } catch (error) {
     const err = new Error();
     err.message =
