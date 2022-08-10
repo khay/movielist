@@ -1,6 +1,9 @@
+require("dotenv").config();
+const { MONGO_URI, PORT } = process.env;
+
 const config = {
-  db: "mongodb://localhost/movielist",
-  port: 3000,
+  db: MONGO_URI,
+  port: PORT,
 };
 
 export default config;
