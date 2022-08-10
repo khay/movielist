@@ -6,4 +6,6 @@ const router = express.Router();
 router.post("/login", UserController.login);
 router.post("/register", UserController.register);
 
-export default router;
+export default app => {
+  app.use('/api/v1', router)
+}

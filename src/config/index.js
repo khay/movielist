@@ -1,9 +1,10 @@
-require("dotenv").config();
-const { MONGO_URI, PORT } = process.env;
+import dotenv from "dotenv"
+dotenv.config();
 
 const config = {
-  db: MONGO_URI,
-  port: PORT,
+  db: "mongodb://localhost/movielist",
+  port: 3000,
+  tokenKey: "C0dingCh@llenge",
 };
 
 export default config;
