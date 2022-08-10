@@ -4,6 +4,8 @@ import jwt from "jsonwebtoken";
 import USER from "../models/user.model";
 import config from "../config/index";
 
+// Login the user with email and password
+// Returns token to access the movie lists
 async function loginService(reqInfo) {
   try {
     const { email, password } = reqInfo;
@@ -38,6 +40,9 @@ async function loginService(reqInfo) {
   }
 }
 
+// Register the user
+// Inputs: first_name, last_name, email, password
+// Returns token to access the movie lists
 async function registerService(reqInfo) {
   try {
     // Get the inputs

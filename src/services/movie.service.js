@@ -40,6 +40,7 @@ async function getMovileListService(reqInfo) {
   }
 }
 
+// Search and return the details of a provided movie `id`
 async function getMovileDetailService(reqInfo) {
   try {
     let movie = await MOVIE.findById(reqInfo.id);
